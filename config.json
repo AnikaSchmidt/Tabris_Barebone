@@ -1,5 +1,5 @@
 {
-    "api_url": "https://survey-manager-be.herokuapp.com/",
+    "api_url": "https://people-queue.herokuapp.com/",
     "auth_header_prefix": "Bearer  ",
     "token_obtain_url": "auth/token/",
     "register_url": "register/",

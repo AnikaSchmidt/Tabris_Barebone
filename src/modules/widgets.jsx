@@ -1,9 +1,10 @@
-import { TextView, Color, Font, Button, drawer, AlertDialog } from 'tabris';
+import { TextView, Color, Font, Button, drawer, contentView } from 'tabris';
 import { loginPage } from '../pages/loginPage';
 import { editProfilePage } from '../pages/editProfilePage';
 import { overviewPage } from '../pages/overviewPage';
 import { color_heading, color_action, font_large, color_info, font_info } from '../config/config';
 import { logout } from './helpers';
+
 
 function getHeadingText(text) {
     return new TextView({
@@ -49,12 +50,37 @@ function initializeDrawer(navigationView) {
         navigationView.append(editProfilePage());
         drawer.close();
     });
-    const overviewButton = new Button({
+    const exploreButton = new Button({
         layoutData: {
             top: 'prev() 8',
             left: 16, right: 16
         },
-        text: 'View Overview',
+        text: 'Explore',
+        background: color_action,
+        highlightOnTouch: false
+    }).onSelect(() => {
+        navigationView.append(overviewPage());
+        drawer.close();
+    });
+    const searchButton = new Button({
+        layoutData: {
+            top: 'prev() 8',
+            left: 16, right: 16
+        },
+        text: 'Search',
+        background: color_action,
+        highlightOnTouch: false
+    }).onSelect(() => {
+        navigationView.append(overviewPage());
+        drawer.close();
+    });
+
+    const favoritesButton = new Button({
+        layoutData: {
+            top: 'prev() 8',
+            left: 16, right: 16
+        },
+        text: 'Favorites',
         background: color_action,
         highlightOnTouch: false
     }).onSelect(() => {
@@ -80,9 +106,35 @@ function initializeDrawer(navigationView) {
             navigationView.append(loginPage(navigationView));
         });
     });
-    drawer.append(overviewButton);
+    drawer.append(exploreButton);
+    drawer.append(searchButton);
+    drawer.append(favoritesButton);
     drawer.append(editProfileButton);
     drawer.append(logoutButton);
 }
 
-export { getActionButton, getHeadingText, initializeDrawer, getInfoText };
+function getFooter() {
+    const exploreButton = new Button({text:"Explore",
+        layoutData: {
+            bottom: true, height: 'auto',
+            left: 5, right: 5
+        }
+    }).onSelect(_explore);
+
+    function _explore() {
+        explorePage(_username, _navigationView).appendTo(_navigationView);
+        page.dispose();
+    };
+
+
+
+    return exploreButton;
+
+};
+
+
+
+
+
+
+export { getActionButton, getHeadingText, initializeDrawer, getInfoText, getFooter };

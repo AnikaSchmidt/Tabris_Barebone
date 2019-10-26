@@ -2,7 +2,7 @@ import { Page, Color, drawer, ScrollView, ImageView, Widget } from 'tabris';
 import { color_heading } from '../config/config';
 import { getActionButton, getFooter } from '../modules/widgets';
 
-export function mainPage(username, navigationView) {
+export function explorePage(username, navigationView) {
     drawer.enabled = true;
     navigationView.drawerActionVisible = true;
     navigationView.titleTextColor = color_heading;

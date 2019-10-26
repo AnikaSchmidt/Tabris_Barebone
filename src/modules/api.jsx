@@ -10,6 +10,7 @@ export async function login(username, password) {
     formData.append('password', password);
     try {
         const response = await fetch(api_url.concat(token_endpoint), { method: 'POST', body: formData });
+        console.log("reached");
         const data = await response.json();
         if (response.ok) {
             localStorage.setItem("access", data.access);

@@ -77,6 +77,7 @@ export function loginPage(navigationView) {
                 }
             );
             const logon_result = await login(username.text, password.text);
+            
             if (logon_result.message === "success") {
                 loginButton.background = color_success;
                 openMainPage(localStorage.getItem("username"), navigationView);
