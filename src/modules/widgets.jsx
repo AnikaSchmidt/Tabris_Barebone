@@ -1,4 +1,4 @@
-import { TextView, Color, Font, Button, drawer, contentView } from 'tabris';
+import { TextView, Color, Font, Button, drawer, contentView, Composite } from 'tabris';
 import { loginPage } from '../pages/loginPage';
 import { editProfilePage } from '../pages/editProfilePage';
 import { overviewPage } from '../pages/overviewPage';
@@ -114,7 +114,8 @@ function initializeDrawer(navigationView) {
 }
 
 function getFooter() {
-    const exploreButton = new Button({text:"Explore",
+    const exploreButton = new Button({
+        text: "Explore",
         layoutData: {
             bottom: true, height: 'auto',
             left: 5, right: 5
@@ -126,9 +127,54 @@ function getFooter() {
         page.dispose();
     };
 
+    const searchButton = new Button({
+        text: "Search",
+        layoutData: {
+            bottom: true, height: 'auto',
+            left: 5, right: 5
+        }
+    }).onSelect(_search);
+
+    function _search() {
+        searchPage(_username, _navigationView).appendTo(_navigationView);
+        page.dispose();
+    };
+
+    const favoritesButton = new Button({
+        text: "Favorites",
+        layoutData: {
+            bottom: true, height: 'auto',
+            left: 5, right: 5
+        }
+    }).onSelect(_favorites);
+
+    function _favorites() {
+        favoritesPage(_username, _navigationView).appendTo(_navigationView);
+        page.dispose();
+    };
+
+    const profileButton = new Button({
+        text: "Profile",
+        layoutData: {
+            bottom: true, height: 'auto',
+            left: 5, right: 5
+        }
+    }).onSelect(_profile);
+
+    function _profile() {
+        profilePage(_username, _navigationView).appendTo(_navigationView);
+        page.dispose();
+    };
+
+    const footer = new Composite({left: 0, top: 0, width: 128, height: 256})
+  .append(exploreButton, searchButton, favoritesButton, profileButton);
 
 
-    return exploreButton;
+    
+
+
+
+    return footer ;
 
 };
 
